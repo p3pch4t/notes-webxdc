@@ -1,0 +1,300 @@
+/** Used for exporting PDF's **/
+.markdown-simple {
+	color: black;
+
+	hr {
+		border: none;
+		border-bottom: 2px solid #00000080;
+	}
+
+	h1,
+	h2 {
+		padding-bottom: 4px;
+		border-bottom: 2px solid #00000080;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin-block: 8px;
+		font-weight: 600;
+	}
+
+	code {
+		padding: 2px 4px;
+		background-color: #00000010;
+		border-radius: 8px;
+
+		font-family: monospace, monospace;
+		* {
+			font-family: inherit;
+		}
+	}
+
+	pre {
+		font-family: monospace, monospace;
+		background-color: #00000010;
+		padding: 8px;
+		border-radius: 8px;
+		overflow: auto;
+
+		font-family: monospace, monospace;
+		& > code {
+			padding: 0;
+			border-radius: 0;
+			background: none;
+		}
+	}
+
+	blockquote {
+		border-left: 3px solid #000000e0;
+		color: #000000e0;
+		padding-left: 8px;
+	}
+
+	ol,
+	ul {
+		padding: 0;
+		padding-left: 2em;
+	}
+
+	input[type="checkbox"] {
+		margin-left: -1em;
+	}
+
+	table {
+		border-collapse: separate;
+		border-spacing: 0;
+		border: 1px solid black;
+		border-radius: 8px;
+		overflow: hidden;
+
+		th {
+			font-weight: bold;
+		}
+
+		th,
+		tr:nth-child(even) {
+			background-color: #00000010;
+		}
+
+		th,
+		td {
+			padding: 8px;
+			text-align: left;
+			&:not(:last-child) {
+				border-right: 1px solid black;
+			}
+		}
+	}
+}
+
+/** Used for markdown on both notes app and exporting HTML **/
+.markdown {
+	color: var(--md-sys-color-on-background);
+
+	hr {
+		border: none;
+		border-bottom: 2px solid var(--md-sys-color-outline-variant);
+	}
+
+	h1,
+	h2 {
+		padding-bottom: 4px;
+		border-bottom: 2px solid var(--md-sys-color-outline-variant);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin-block: 8px;
+		font-weight: 600;
+	}
+
+	code {
+		padding: 2px 4px;
+		background-color: var(--md-sys-color-secondary-container);
+		border-radius: 8px;
+
+		font-family: monospace, monospace;
+		* {
+			font-family: inherit;
+		}
+	}
+
+	pre {
+		font-family: monospace, monospace;
+		background-color: var(--md-sys-color-secondary-container);
+		padding: 8px;
+		border-radius: 8px;
+		overflow: auto;
+
+		font-family: monospace, monospace;
+		& > code {
+			padding: 0;
+			border-radius: 0;
+			background: none;
+		}
+	}
+
+	blockquote {
+		border-left: 3px solid var(--md-sys-color-primary);
+		color: var(--md-sys-color-primary);
+		padding-left: 8px;
+	}
+
+	a {
+		color: var(--md-sys-color-primary);
+	}
+
+	ol,
+	ul {
+		padding: 0;
+		padding-left: 2em;
+	}
+
+	@keyframes outward-grow {
+		from {
+			outline-width: 0;
+		}
+		to {
+			outline-width: 8px;
+		}
+	}
+
+	@keyframes outward-shrink {
+		from {
+			outline-width: 8px;
+		}
+
+		to {
+			outline-width: 3px;
+		}
+	}
+
+	input[type="checkbox"] {
+		position: relative;
+		appearance: none;
+
+		user-select: none;
+		cursor: pointer;
+		vertical-align: middle;
+
+		padding: 0;
+		margin-block: 3px;
+		margin-right: 2px;
+		margin-left: -1.5em;
+
+		width: 18px;
+		height: 18px;
+		border-radius: 2px;
+
+		overflow: hidden;
+
+		transition-property: color, background-color;
+		transition-timing-function: var(--md-transition-timing-function);
+		transition-duration: var(--md-transition-duration);
+
+		&::before {
+			position: absolute;
+			box-sizing: border-box;
+
+			display: none;
+			pointer-events: none;
+
+			top: -50%;
+			left: -50%;
+			width: 200%;
+			height: 200%;
+			content: "";
+			border-radius: 9999px;
+
+			outline: 0px solid var(--md-sys-color-on-surface);
+			transition: var(--md-default-transition);
+		}
+
+		&:hover::before {
+			display: block;
+			background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+		}
+
+		&:active::before {
+			background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+		}
+
+		&:focus-visible {
+			outline: none;
+
+			&::before {
+				display: block;
+				animation-name: outward-grow, outward-shrink;
+				animation-delay: 0ms, 150ms;
+				animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+				animation-duration: 150ms, 450ms;
+				animation-fill-mode: forwards;
+			}
+		}
+
+		&:not(:checked) {
+			background-color: var(--md-sys-color-surface);
+			box-shadow: inset 0 0 0 2px var(--md-sys-color-on-surface-variant);
+		}
+
+		&:checked {
+			background-color: var(--md-sys-color-primary);
+
+			&::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+
+				background-color: var(--md-sys-color-on-primary);
+				mask: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMiAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgOS40MDAwNkwwIDUuNDAwMDZMMS40IDQuMDAwMDZMNCA2LjYwMDA2TDEwLjYgNi4xMDM1MmUtMDVMMTIgMS40MDAwNkw0IDkuNDAwMDZaIiBmaWxsPSJ3aGl0ZSIgLz4KPC9zdmc+Cg==);
+				mask-repeat: no-repeat;
+				mask-position: center;
+			}
+		}
+
+		&:disabled {
+			background-color: var(--md-sys-color-on-surface);
+		}
+	}
+
+	table {
+		border-collapse: separate;
+		border-spacing: 0;
+		border: 2px solid var(--md-sys-color-outline-variant);
+		border-radius: 12px;
+		overflow: hidden;
+
+		background-color: var(--md-sys-color-surface-container);
+		color: var(--md-sys-color-on-surface-container);
+
+		th {
+			font-weight: bold;
+		}
+
+		th,
+		tr:nth-child(even) {
+			background-color: var(--md-sys-color-surface-container-high);
+		}
+
+		th,
+		td {
+			padding: 8px;
+			text-align: left;
+			&:not(:last-child) {
+				border-right: 1px solid var(--md-sys-color-outline-variant);
+			}
+		}
+	}
+}

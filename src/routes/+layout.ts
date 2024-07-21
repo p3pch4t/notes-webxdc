@@ -1,0 +1,4 @@
+export const ssr = false;
+export const csr = true;
+export const prerender = "auto";
+export const trailingSlash = "never";
